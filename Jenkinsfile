@@ -13,12 +13,13 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'docker build -t jenkins-demo-app:latest .'
+                sh 'docker build --no-cache -t jenkins-demo-app:latest .'
             }
         }
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 5000:5000 --name demo-app jenkins-demo-app:latest'
+                sh 'docker rm -f demo-app || true'
+                sh 'docker run -d -p 8081:8081 --name demo-app jenkins-demo-app:latest || true'
             }
         }
     }
