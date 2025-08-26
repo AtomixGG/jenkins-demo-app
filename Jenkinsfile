@@ -29,7 +29,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo "Running tests..."'
-                sh 'pytest || true'
+                sh 'docker exec demo-app pytest || true'
             }
         }
     }
